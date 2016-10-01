@@ -1,0 +1,163 @@
+html {
+    height: 100%
+}
+
+body {
+    height: 100% !important;
+    overflow-y: hidden;
+}
+
+.btn-lg {
+    width: 80% !important;
+    margin: 20px;
+}
+
+td, th {
+    text-align: center !important;
+}
+
+.main-page-row {
+    margin-top: 20% !important;
+}
+
+#header {
+    width: 60% !important;
+    float: left;
+    margin-top: 0 !important;
+}
+
+#add-button {
+    float: right;
+    margin-top: 15px;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* 15% from the top and centered */
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    border: 1px solid #888;
+    width: 30%; /* Could be more or less, depending on screen size */
+    text-align: center;
+}
+
+#title {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+tbody tr:hover {
+    background-color: darkgrey !important;
+}
+
+#market-page-header {
+    text-align: center;
+}
+
+select {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-padding-end: 20px;
+    -moz-padding-end: 20px;
+    -webkit-padding-start: 2px;
+    -moz-padding-start: 2px;
+    background-color: #D7ECCE; /* fallback color if gradients are not supported */
+    background-repeat: no-repeat;
+    border: 1px solid #AAA;
+    border-radius: 10px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    color: #555;
+    font-size: 25px;
+    margin: 0;
+    overflow: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 35px;
+    padding-right: 35px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.market-container {
+    height: 100% !important;
+}
+
+.product-panel-container {
+    height: 100% !important;
+}
+
+.product-panel {
+    height: 47% !important;
+    max-height: 47%; !important;
+    overflow-y: auto;
+}
+
+.summary-panel {
+    height: 31% !important;
+    max-height: 31%; !important;
+    overflow-y: auto;
+}
+
+.history-panel {
+    height: 80% !important;
+    max-height: 80%; !important;
+    overflow-y: auto;
+}
+
+.price {
+    width: 50% !important;
+    display: inline-block !important;
+    height: 42px !important;
+    width: 135px !important;
+    font-size: larger !important;
+    border-radius: 10px !important;
+}
+
+#market-modal {
+    text-align: center !important;
+}
+
+.summary-body {
+    overflow-y: hidden !important;
+}
+
+.price-badge {
+    background-color: #0d008d !important;
+}
+
+.money-badge {
+    background-color: #4eb100 !important;
+}
+
+.debt-badge {
+    background-color: #b1000f !important;
+}
+
+.mix-badge {
+    background-color: #de922f !important;
+}
+
+.edit {
+    width: 100% !important;
+}
+
+#actionBtn:hover, #myBtn:hover {
+    background-color: #beeca7 !important;
+}
