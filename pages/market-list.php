@@ -35,6 +35,8 @@ require_once "../components/nav.php"
 
 <?php
 
+session_start();
+$userId = $_SESSION["userId"];
 $it = 1;
 
 if(isset($_POST["name"]) && $_POST["name"] != "") {

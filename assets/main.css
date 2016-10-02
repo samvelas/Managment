@@ -7,6 +7,17 @@ body {
     overflow-y: hidden;
 }
 
+#login, #password {
+    margin: 20px 0;
+    height: 50px;
+    font-size: 30px;
+}
+
+#login-btn {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
 .btn-lg {
     width: 80% !important;
     margin: 20px;

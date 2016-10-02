@@ -6,22 +6,25 @@ require_once "../dbActions/db_products.php";
 require_once "../dbActions/db_history.php";
 require_once "../dbActions/db_full_pay_history.php";
 
+session_start();
+$userId = $_SESSION["userId"];
+
+
 if (isset($_GET["marketId"])) {
     $currentMarketId = $_GET["marketId"];
     $currentMarket = getMarketAtId($currentMarketId);
 }
 
-$products = getProducts();
+$products = getProducts($userId);
 
 if (isset($_POST["productId"]) && isset($_POST["price"])) {
-    $product = [];
     $product["id"] = $_POST["productId"];
     $product["price"] = $_POST["price"];
 
-    createProductForMarketAtId($currentMarketId, $product);
+    createProductForMarketAtId($userId, $currentMarketId, $product);
 }
 
-$marketProducts = getProductsOfMarketAtId($currentMarketId);
+$marketProducts = getProductsOfMarketAtId($userId, $currentMarketId);
 
 if (isset($_POST["actionProductId"]) && isset($_POST["price"]) && isset($_POST["weight"]) && isset($_POST["total"])) {
     $soldProductId = ($_POST["actionProductId"]);
@@ -29,12 +32,10 @@ if (isset($_POST["actionProductId"]) && isset($_POST["price"]) && isset($_POST["
     $soldProductWeight = ($_POST["weight"]);
     $soldProductTotal = ($_POST["total"]);
 
-    $history = [
-        'product_id' => $soldProductId,
+    $history = ['product_id' => $soldProductId,
         'price' => $soldProductPrice,
         'weight' => $soldProductWeight,
-        'total' => $soldProductTotal
-    ];
+        'total' => $soldProductTota];
 
     $idInHistory = addHistoryToMarketAt($currentMarketId, $history);
 

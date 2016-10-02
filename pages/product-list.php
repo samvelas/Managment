@@ -1,7 +1,10 @@
 <?php
 require_once "../components/header.php";
 require_once "../dbActions/db_products.php";
-require_once "../components/nav.php"
+require_once "../components/nav.php";
+
+session_start();
+$userId = $_SESSION["userId"];
 ?>
 
 <div class="container">
@@ -39,10 +42,10 @@ require_once "../components/nav.php"
 
     if(isset($_POST["name"]) && $_POST["name"] != "") {
         $newProductName = $_POST["name"];
-        createProduct($newProductName);
+        createProduct($userId, $newProductName);
     }
 
-    $products = getProducts();
+    $products = getProducts($userId);
     $quantity = count($products);
 
     ?>
