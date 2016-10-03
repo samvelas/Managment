@@ -1,11 +1,11 @@
 <?php
 require_once "../connection/database.php";
 
-function getFullPayDates () {
+function getFullPayDates ($userId) {
     global $dbConnection;
 
     $dates = [];
-    $sql = "SELECT * FROM full_pay_date";
+    $sql = "SELECT * FROM full_pay_date WHERE user_id=" . $userId;
     $result = mysqli_query($dbConnection, $sql);
 
     if (mysqli_num_rows($result) > 0) {

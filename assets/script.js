@@ -1,6 +1,8 @@
 // Get the modal
 var modal = document.getElementById('myModal');
 
+var productModal = document.getElementById('productModal');
+
 var actionModal = document.getElementById('actionModal');
 
 var addModal = document.getElementById('addModal');
@@ -19,6 +21,11 @@ actionBtn.onclick = function() {
 
 
 window.onclick = function(event) {
+
+    if (event.target == productModal) {
+
+        productModal.style.display = "none";
+    }
 
     if (event.target == modal) {
 

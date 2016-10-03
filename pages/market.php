@@ -6,7 +6,11 @@ require_once "../dbActions/db_products.php";
 require_once "../dbActions/db_history.php";
 require_once "../dbActions/db_full_pay_history.php";
 
-session_start();
+
+if (!isset($_SESSION["userId"])) {
+    header('Location: ../index.php');
+}
+
 $userId = $_SESSION["userId"];
 
 
@@ -37,7 +41,7 @@ if (isset($_POST["actionProductId"]) && isset($_POST["price"]) && isset($_POST["
         'weight' => $soldProductWeight,
         'total' => $soldProductTota];
 
-    $idInHistory = addHistoryToMarketAt($currentMarketId, $history);
+    $idInHistory = addHistoryToMarketAt($userId, $currentMarketId, $history);
 
     if($soldProductPrice * $soldProductWeight == $soldProductTotal) {
         setFullPayDate($idInHistory);
@@ -61,7 +65,7 @@ if(isset($_POST["addedCash"]) && isset($_POST["history_id"])) {
 }
 
 $history = getHistoryForMarketAtId($currentMarketId);
-$payDates = getFullPayDates();
+$payDates = getFullPayDates($userId);
 
 $totalSummary = totalAmountOfEveryProduct($currentMarketId, $products);
 
@@ -173,7 +177,7 @@ foreach ($totalSummary as $key => $item) {
             </div>
             <div class="panel-body">
                 <div class="list-group">
-                    <button style="background-color: #D7ECCE" id="myBtn" type="button" class="list-group-item" aria-label="Left Align">
+                    <button style="background-color: #D7ECCE" id="myBtn" type="button" class="list-group-item add-product-btn" aria-label="Left Align">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true">
                             <h4 style="display: inline-block" class="list-group-item-heading">Добавить продукт</h4>
                         </span>

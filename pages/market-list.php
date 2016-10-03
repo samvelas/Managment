@@ -35,16 +35,20 @@ require_once "../components/nav.php"
 
 <?php
 
-session_start();
+if (!isset($_SESSION["userId"])) {
+    header('Location: ../index.php');
+}
+
+
 $userId = $_SESSION["userId"];
 $it = 1;
 
 if(isset($_POST["name"]) && $_POST["name"] != "") {
     $newMarketName = $_POST["name"];
-    createMarket($newMarketName);
+    createMarket($userId, $newMarketName);
 }
 
-$markets = getMarkets();
+$markets = getMarkets($userId);
 $quantity = count($markets);
 
 ?>

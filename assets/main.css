@@ -28,7 +28,7 @@ td, th {
 }
 
 .main-page-row {
-    margin-top: 20% !important;
+    margin-top: 15% !important;
 }
 
 #header {
@@ -169,6 +169,6 @@ select {
     width: 100% !important;
 }
 
-#actionBtn:hover, #myBtn:hover {
+#actionBtn:hover, .add-product-btn:hover {
     background-color: #beeca7 !important;
 }

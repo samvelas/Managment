@@ -5,12 +5,19 @@ require "db_users.php";
 $check = false;
 session_start();
 
+if(isset($_GET["action"])) {
+    if($_GET["action"] == "out") {
+        session_destroy();
+        header('Location: index.php');
+    }
+}
+
 if(isset($_POST["login"]) && isset($_POST["password"]) && $_POST["login"] != "" && $_POST["password"] != "") {
     $login = $_POST["login"];
     $password = $_POST["password"];
 
     if(existsUser($login, $password)) {
-        $userId = existsUser($login, $password);
+        $user = existsUser($login, $password);
         $check = true;
     }
 }
@@ -18,7 +25,12 @@ if(isset($_POST["login"]) && isset($_POST["password"]) && $_POST["login"] != "" 
 if ($check) {
     $_SESSION['valid'] = true;
     $_SESSION['timeout'] = time();
-    $_SESSION['userId'] = $userId;
+    $_SESSION['userId'] = $user["id"];
+    $_SESSION['username'] = $user["username"];
+}
+
+if(isset($_SESSION["userId"])) {
+    $check = true;
 }
 
 ?>
@@ -36,7 +48,7 @@ if ($check) {
                     </form>';
                 } else {
                     echo '
-                        <div >
+                    <div >
                         <a class="btn btn-default btn-lg" > Покупка</a >
                     </div >
                     <div >
@@ -50,7 +62,11 @@ if ($check) {
                     </div >
                     <div >
                         <a href = "pages/history.php" class="btn btn-default btn-lg" > Вся история </a >
+                    </div >
+                    <div >
+                        <a href = "index.php?action=out" class="btn btn-warning btn-lg" > Выйти из системы</a >
                     </div >';
+
                 }
             ?>
         </div>

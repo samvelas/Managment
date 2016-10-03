@@ -3,13 +3,18 @@ require_once "../components/header.php";
 require_once "../dbActions/db_products.php";
 require_once "../components/nav.php";
 
-session_start();
+
+if (!isset($_SESSION["userId"])) {
+    header('Location: ../index.php');
+}
+
+
 $userId = $_SESSION["userId"];
 ?>
 
 <div class="container">
 
-    <div id="myModal" class="modal">
+    <div id="productModal" class="modal">
 
         <!-- Modal content -->
 

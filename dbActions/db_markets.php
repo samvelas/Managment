@@ -1,12 +1,12 @@
 <?php
 require_once "../connection/database.php";
 
-function getMarkets() {
+function getMarkets($userId) {
     global $dbConnection;
 
     $markets = [];
 
-    $sql = "SELECT * FROM markets";
+    $sql = "SELECT * FROM markets WHERE user_id=" . $userId;
     $result = mysqli_query($dbConnection, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -38,9 +38,9 @@ function getMarketAtId($id) {
     return $market;
 }
 
-function createMarket($market) {
+function createMarket($userId, $market) {
     global $dbConnection;
 
-    $sql = "INSERT INTO markets (`name`) VALUES ('" . $market . "')";
+    $sql = "INSERT INTO markets (`name`, `user_id`) VALUES ('" . $market . "', '" . $userId ."')";
     mysqli_query($dbConnection, $sql);
 }

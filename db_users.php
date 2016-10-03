@@ -12,12 +12,16 @@ function existsUser($login, $password) {
         // output data of each row
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row["id"];
+            $username = $row["username"];
             $exists = true;
         }
     }
 
     if ($exists) {
-        return $id;
+        return [
+            "id" => $id,
+            "username" => $username
+        ];
     }
 
     return false;

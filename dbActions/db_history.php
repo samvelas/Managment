@@ -29,15 +29,17 @@ function getHistoryForMarketAtId($marketId) {
     return $history;
 }
 
-function addHistoryToMarketAt($marketId, $history) {
+function addHistoryToMarketAt($userId, $marketId, $history) {
     global $dbConnection;
 
-    $sql = "INSERT INTO history (market_id, product_id, price, weight, total) VALUES ('" . $marketId . "',
-                                                                                      '" . $history["product_id"] . "',
-                                                                                      '" . $history["price"] . "',
-                                                                                      '" . $history["weight"] . "',
-                                                                                      '" . $history["total"] ."'
-                                                                                      )";
+    $sql = "INSERT INTO history (user_id, market_id, product_id, price, weight, total) 
+            VALUES ('" . $userId . "',
+                  '" . $marketId . "',
+                  '" . $history["product_id"] . "',
+                  '" . $history["price"] . "',
+                  '" . $history["weight"] . "',
+                  '" . $history["total"] ."'
+                  )";
     mysqli_query($dbConnection, $sql);
 
     $sql = "SELECT max(id) as id FROM history";
