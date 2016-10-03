@@ -13,18 +13,18 @@ $username = $_SESSION["username"];
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost/managment/index.php">Главная страница</a>
+            <a class="navbar-brand navbar-child" href="http://localhost/managment/index.php">Главная страница</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="http://localhost/managment/pages/market-list.php">Магазины</a></li>
-                <li><a href="http://localhost/managment/pages/product-list.php">Продукты</a></li>
+                <li><a class="navbar-child" href="http://localhost/managment/pages/market-list.php">Магазины</a></li>
+                <li><a class="navbar-child" href="http://localhost/managment/pages/product-list.php">Продукты</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Отчёт</a></li>
-                <li><a href="../index.php?action=out">Выйти (<?= $username?>)</a> </li>
+                <li><a class="navbar-child" href="#">Отчёт</a></li>
+                <li><a class="navbar-child" href="../index.php?action=out">Выйти (<?= $username?>)</a> </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

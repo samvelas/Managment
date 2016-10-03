@@ -4,7 +4,6 @@ html {
 
 body {
     height: 100% !important;
-    overflow-y: hidden;
 }
 
 #login, #password {
@@ -25,6 +24,11 @@ body {
 
 td, th {
     text-align: center !important;
+}
+
+.navbar-child {
+    color: lightyellow !important;
+    font-weight: bolder;
 }
 
 .main-page-row {
@@ -116,7 +120,15 @@ select {
 
 .product-panel {
     height: 47% !important;
-    max-height: 47%; !important;
+    overflow-y: auto;
+}
+
+.panel-body {
+    height: 90% !important;
+}
+
+.product-list {
+    height: 60% !important;
     overflow-y: auto;
 }
 

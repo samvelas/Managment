@@ -26,3 +26,12 @@ function existsUser($login, $password) {
 
     return false;
 }
+
+function backUp(){
+    global $dbConnection;
+
+    $file = 'backups/mytable.data';
+    mysqli_query($dbConnection, "SELECT * INTO OUTFILE '" . $file . "' FROM `history`");
+
+
+}

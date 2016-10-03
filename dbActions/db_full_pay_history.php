@@ -5,7 +5,7 @@ function getFullPayDates ($userId) {
     global $dbConnection;
 
     $dates = [];
-    $sql = "SELECT * FROM full_pay_date WHERE user_id=" . $userId;
+    $sql = "SELECT * FROM full_pay_date";
     $result = mysqli_query($dbConnection, $sql);
 
     if (mysqli_num_rows($result) > 0) {

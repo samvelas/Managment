@@ -14,7 +14,7 @@ $userId = $_SESSION["userId"];
 
 <div class="container">
 
-    <div id="productModal" class="modal">
+    <div id="myModal" class="modal">
 
         <!-- Modal content -->
 

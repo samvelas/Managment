@@ -33,6 +33,8 @@ if(isset($_SESSION["userId"])) {
     $check = true;
 }
 
+backUp();
+
 ?>
 
 <div class="container">

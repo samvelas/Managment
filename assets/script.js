@@ -1,8 +1,6 @@
 // Get the modal
 var modal = document.getElementById('myModal');
 
-var productModal = document.getElementById('productModal');
-
 var actionModal = document.getElementById('actionModal');
 
 var addModal = document.getElementById('addModal');
@@ -15,17 +13,8 @@ btn.onclick = function() {
     modal.style.display = "block";
 }
 
-actionBtn.onclick = function() {
-    actionModal.style.display = "block";
-}
-
 
 window.onclick = function(event) {
-
-    if (event.target == productModal) {
-
-        productModal.style.display = "none";
-    }
 
     if (event.target == modal) {
 
@@ -41,6 +30,11 @@ window.onclick = function(event) {
 
         addModal.style.display = "none";
     }
+
+}
+
+actionBtn.onclick = function() {
+    actionModal.style.display = "block";
 }
 
 
@@ -53,4 +47,29 @@ function calculateTotal(){
     var weight = document.getElementById("weight").value;
     document.getElementById("total").value = price * weight;
 
+}
+
+function changedStateOfProductAtId(id) {
+    var elementId = "" + id;
+    var action = 0;
+
+    var element = document.getElementById(elementId);
+
+    if(element.style.backgroundColor == "") {
+        element.style.backgroundColor = "#CCE7F4";
+        action = 1;
+    } else {
+        element.style.backgroundColor = "";
+    }
+
+    var ulChildren = document.getElementById('products');
+
+    var idArray = [];
+    var childrenLength = ulChildren.length;
+
+    for(var i = 0; i < childrenLength; i++){
+        idArray.push(ulChildren[i].id);
+    }
+
+    console.log(ulChildren);
 }

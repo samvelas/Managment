@@ -36,10 +36,12 @@ if (isset($_POST["actionProductId"]) && isset($_POST["price"]) && isset($_POST["
     $soldProductWeight = ($_POST["weight"]);
     $soldProductTotal = ($_POST["total"]);
 
-    $history = ['product_id' => $soldProductId,
+    $history = [
+        'product_id' => $soldProductId,
         'price' => $soldProductPrice,
         'weight' => $soldProductWeight,
-        'total' => $soldProductTota];
+        'total' => $soldProductTotal
+    ];
 
     $idInHistory = addHistoryToMarketAt($userId, $currentMarketId, $history);
 
@@ -69,9 +71,9 @@ $payDates = getFullPayDates($userId);
 
 $totalSummary = totalAmountOfEveryProduct($currentMarketId, $products);
 
-$totalWeightOfEveryProduct = new SplFixedArray(1000000);
-$totalMoneyFromEveryProduct = new SplFixedArray(1000000);
-$totalDebtOfEveryProduct = new SplFixedArray(1000000);
+$totalWeightOfEveryProduct = new SplFixedArray(1000);
+$totalMoneyFromEveryProduct = new SplFixedArray(1000);
+$totalDebtOfEveryProduct = new SplFixedArray(1000);
 
 $totalWeight = 0;
 $totalMoney = 0;
@@ -177,16 +179,16 @@ foreach ($totalSummary as $key => $item) {
             </div>
             <div class="panel-body">
                 <div class="list-group">
-                    <button style="background-color: #D7ECCE" id="myBtn" type="button" class="list-group-item add-product-btn" aria-label="Left Align">
+                    <button style="background-color: #D7ECCE" id="myBtn" type="button" class="list-group-item" aria-label="Left Align">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true">
                             <h4 style="display: inline-block" class="list-group-item-heading">Добавить продукт</h4>
                         </span>
                     </button>
                 </div>
-                <ul class="list-group">
+                <ul id="product-list" class="list-group product-list">
                     <?php
                     foreach ($marketProducts as $key => $product) {
-                        echo '<li class="list-group-item">';
+                        echo '<li id="' . $key . '" onclick="changedStateOfProductAtId(' . $key . ')" class="list-group-item">';
                         echo '<span class="badge money-badge">' . $totalMoneyFromEveryProduct[$key] . '</span>';
                         echo '<span class="badge debt-badge">' . $totalDebtOfEveryProduct[$key] . '</span>';
                         echo '<span class="badge mix-badge">' . ($totalMoneyFromEveryProduct[$key] - $totalDebtOfEveryProduct[$key]) . '</span>';
@@ -196,6 +198,14 @@ foreach ($totalSummary as $key => $item) {
                         echo '</li>';
                     }
                     ?>
+                </ul>
+                <ul class="list-group">
+                    <li style="background-color: #FBF5D6" class="list-group-item">
+                        <span id="t-money" class="badge money-badge">0</span>
+                        <span id="t-debt" class="badge debt-badge">0</span>
+                        <span id="t-money-debt" class="badge mix-badge">0</span>
+                        <span id="t-weight" class="badge">0</span>
+                        Сумма выбранных</li>
                 </ul>
             </div>
         </div>
@@ -290,6 +300,14 @@ require_once "../components/footer.php";
 <script type="text/javascript">
 
     var products = <?= json_encode($marketProducts) ?>;
+    var totalWeightOfEveryProduct = <?= json_encode($totalWeightOfEveryProduct) ?>;
+    var totalMoneyOfEveryProduct = <?= json_encode($totalMoneyFromEveryProduct) ?>;
+    var totalDebtOfEveryProduct = <?= json_encode($totalDebtOfEveryProduct) ?>;
+
+    var selWeight = document.getElementById("t-weight");
+    var selMoney = document.getElementById("t-money");
+    var selDebt = document.getElementById("t-debt");
+    var selDif = document.getElementById("t-money-debt");
 
     function changedToId() {
         var x = document.getElementById("products").value;
@@ -326,4 +344,47 @@ require_once "../components/footer.php";
         document.getElementById("add-modal").appendChild(input);
 
     }
+
+    function changedStateOfProductAtId(id) {
+        var elementId = "" + id;
+        var action = 0;
+
+        var weightSum = 0, moneySum = 0, debtSum = 0, difSum = 0;
+
+        var element = document.getElementById(elementId);
+
+        if(element.style.backgroundColor == "") {
+            element.style.backgroundColor = "#CCE7F4";
+        } else {
+            element.style.backgroundColor = "";
+        }
+
+        var ulChildren = document.getElementById('product-list').children;
+
+        var idArray = [];
+        var childrenLength = ulChildren.length;
+
+        for(var i = 0; i < childrenLength; i++) {
+            idArray.push(ulChildren[i].id);
+        }
+
+        for (var i = 0; i < idArray.length; i++) {
+            var curElementId = idArray[i];
+            var curElement = document.getElementById(curElementId + "");
+
+            if(curElement.style.backgroundColor != "") {
+                weightSum += totalWeightOfEveryProduct[curElementId];
+                moneySum += totalMoneyOfEveryProduct[curElementId];
+                debtSum += totalDebtOfEveryProduct[curElementId];
+                difSum += totalMoneyOfEveryProduct[curElementId] - totalDebtOfEveryProduct[curElementId];
+            }
+        }
+
+        selMoney.innerHTML = moneySum + "";
+        selDif.innerHTML = difSum + "";
+        selDebt.innerHTML = debtSum + "";
+        selWeight.innerHTML = weightSum + "";
+
+    }
+
 </script>
